@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RoFFu</string>
+    <string name="app_name">Yassir Rentals</string>
     <string name="no_available_data">No available data</string>
     <string name="net_conn_err_title">Network connection error!</string>
     <string name="no_avail_data_err_title">No available data!</string>
@@ -17,7 +17,7 @@
     <string name="get_started">Get Started 🔥</string>
     <string name="cart">Cart</string>
     <string name="product_details">Product Details</string>
-    <string name="x_dollar">$ %1$s</string>
+    <string name="x_dollar">DZD %1$s</string>
     <string name="discover">Discover</string>
     <string name="share">Share</string>
     <string name="empty_cart">Clear cart</string>

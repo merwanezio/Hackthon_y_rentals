@@ -41,20 +41,23 @@ abstract class RoomDb : RoomDatabase() {
         private val description =
             "This is the description text that is supposed to be long enough to show how the UI looks, so it's not a real text.\n"
         private val manufacturers = listOf(
-            Manufacturer(id = 1, name = "Nike", icon = R.drawable.ic_nike),
-            Manufacturer(id = 2, name = "Adidas", icon = R.drawable.adidas_48),
+            Manufacturer(id = 1, name = "For Family", icon = R.drawable.ic_round_family_restroom_24),
+            Manufacturer(id = 2, name = "Single", icon = R.drawable.ic_baseline_directions_run_24),
+            Manufacturer(id = 3, name = "Student", icon = R.drawable.ic_round_school_24),
+            Manufacturer(id = 4, name = "Vacation", icon = R.drawable.ic_round_wb_sunny_24),
         )
         private val advertisements = listOf(
-            Advertisement(1, R.drawable.air_huarache_gold_black_ads, 1, 0),
-            Advertisement(2, R.drawable.pegasus_trail_gortex_ads, 2, 0),
-            Advertisement(3, R.drawable.blazer_low_black_ads, 3, 0),
+            Advertisement(1, R.drawable.image1, 1, 0),
+            Advertisement(2, R.drawable.image2, 2, 0),
+            Advertisement(3, R.drawable.image3, 3, 0),
+            Advertisement(4, R.drawable.image4, 4, 0),
         )
         private val nikeProducts = listOf(
             Product(
                 id = 1,
-                name = "Pegasus Trail Gortex Green",
-                image = R.drawable.pegasus_trail_3_gore_tex_dark_green,
-                price = 149.0,
+                name = "Whole 2 bedrooms apartment",
+                image = R.drawable.image05,
+                price = 20000.0,
                 description = description,
                 manufacturerId = 1,
                 basicColorName = "dark-green",
@@ -65,14 +68,14 @@ abstract class RoomDb : RoomDatabase() {
                         image = it.image),
                     ProductColor(productId = it.id,
                         colorName = "lemon",
-                        image = R.drawable.pegasus_trail_3_gore_tex_lemon),
+                        image = R.drawable.image05),
                 )
             },
             Product(
                 id = 3,
-                name = "Air Huarache Gold",
-                image = R.drawable.air_huarache_le_gold_black,
-                price = 159.0,
+                name = "Furnished 1-bedroom apartment",
+                image = R.drawable.image06,
+                price = 15000.0,
                 description = description,
                 manufacturerId = 1,
                 basicColorName = "gold",
@@ -83,20 +86,20 @@ abstract class RoomDb : RoomDatabase() {
                         image = it.image),
                     ProductColor(productId = it.id,
                         colorName = "gray",
-                        image = R.drawable.air_huarache_le_gray_dark),
+                        image = R.drawable.image06),
                     ProductColor(productId = it.id,
                         colorName = "pink",
-                        image = R.drawable.air_huarache_le_pink_black),
+                        image = R.drawable.image06),
                     ProductColor(productId = it.id,
                         colorName = "red",
-                        image = R.drawable.air_huarache_le_red_black),
+                        image = R.drawable.image06),
                 )
             },
             Product(
                 id = 7,
-                name = "Blazer Low Black",
-                image = R.drawable.blazer_low_black,
-                price = 120.0,
+                name = "Practical and modern 1 bedroom apartment",
+                image = R.drawable.image07,
+                price = 32000.0,
                 description = description,
                 manufacturerId = 1,
                 basicColorName = "black",
@@ -107,19 +110,19 @@ abstract class RoomDb : RoomDatabase() {
                         image = it.image),
                     ProductColor(productId = it.id,
                         colorName = "pink",
-                        image = R.drawable.blazer_low_pink),
+                        image = R.drawable.image07),
                     ProductColor(productId = it.id,
                         colorName = "lemon",
-                        image = R.drawable.blazer_low_light_green),
+                        image = R.drawable.image07),
                 )
             },
         )
         private val adidasProducts = listOf(
             Product(
                 id = 10,
-                name = "Defiant Generation Green",
-                image = R.drawable.defiant_generation_green,
-                price = 149.0,
+                name = "Cozy 1-bedroom apartment with patio",
+                image = R.drawable.image08,
+                price = 14900.0,
                 description = description,
                 manufacturerId = 2,
                 basicColorName = "green",
@@ -130,15 +133,15 @@ abstract class RoomDb : RoomDatabase() {
                         image = it.image),
                     ProductColor(productId = it.id,
                         colorName = "red",
-                        image = R.drawable.defiant_generation_red),
+                        image = R.drawable.image08),
                 )
             },
 
             Product(
                 id = 12,
-                name = "Solarthon Primegreen Gray",
-                image = R.drawable.solarthon_primegreen_gray,
-                price = 159.0,
+                name = "Furnished 1-bedroom apartment",
+                image = R.drawable.image1,
+                price = 15900.0,
                 description = description,
                 manufacturerId = 2,
                 basicColorName = "gray",
@@ -149,10 +152,10 @@ abstract class RoomDb : RoomDatabase() {
                         image = it.image),
                     ProductColor(productId = it.id,
                         colorName = "black",
-                        image = R.drawable.solarthon_primegreen_black),
+                        image = R.drawable.image1),
                     ProductColor(productId = it.id,
                         colorName = "red",
-                        image = R.drawable.solarthon_primegreen_red),
+                        image = R.drawable.image1),
                 )
             },
         )
@@ -197,17 +200,13 @@ abstract class RoomDb : RoomDatabase() {
             nikeProducts.onEach {
                 it.sizes = mutableListOf(
                     ProductSize(it.id, 38),
-                    ProductSize(it.id, 40),
-                    ProductSize(it.id, 42),
-                    ProductSize(it.id, 44),
+
                 )
             }
             adidasProducts.onEach {
                 it.sizes = mutableListOf(
                     ProductSize(it.id, 38),
-                    ProductSize(it.id, 40),
-                    ProductSize(it.id, 42),
-                    ProductSize(it.id, 44),
+
                 )
             }
 
@@ -222,8 +221,8 @@ abstract class RoomDb : RoomDatabase() {
                 dao.saveUser(
                     User(
                         userId = 1,
-                        name = "Mustafa Ibrahim",
-                        profile = R.drawable.mustapha_profile,
+                        name = "Merwan",
+                        profile = R.drawable.ic_profile_empty,
                         phone = "+249922943879",
                         email = "mustfaibra@gmail.com",
                         password = "12344321",

@@ -1,12 +1,7 @@
 package com.mustfaibra.roffu.components
 
 import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.TweenSpec
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateInt
-import androidx.compose.animation.core.animateIntOffset
-import androidx.compose.animation.core.updateTransition
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -17,21 +12,10 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActionScope
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Snackbar
-import androidx.compose.material.SnackbarData
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -381,7 +365,7 @@ fun ReactiveCartIcon(
             false -> MaterialTheme.colors.onBackground.copy(alpha = 0.5f)
         }
     }
-    val rotation by transition.animateFloat(label = "rotation") { if (it) 360f else -360f }
+    val rotation by transition.animateFloat(label = "rotation") { if (it) 0f else 0f }
     Icon(
         painter = painterResource(id = R.drawable.ic_shopping_bag),
         contentDescription = null,
@@ -411,7 +395,7 @@ fun ReactiveBookmarkIcon(
             false -> MaterialTheme.colors.onBackground.copy(alpha = 0.5f)
         }
     }
-    val rotation by transition.animateFloat(label = "rotation") { if (it) 360f else -360f }
+    val rotation by transition.animateFloat(label = "rotation") { if (it) 0f else 0f }
     Icon(
         painter = painterResource(id = if (isOnBookmarks) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark),
         contentDescription = null,
@@ -456,7 +440,7 @@ fun ProductItemLayout(
         },
         transitionSpec = {
             TweenSpec(
-                durationMillis = 1000,
+                durationMillis = 500,
                 easing = LinearEasing,
             )
         },
@@ -468,20 +452,19 @@ fun ProductItemLayout(
     val animatedFloatProductSize by productTransition.animateInt(
         label = "Product transition - size",
         targetValueByState = {
-            if (it) 0
-            else floatingProductSize
+            0
         },
         transitionSpec = {
             TweenSpec(
-                durationMillis = 1000,
+                durationMillis = 500,
                 easing = LinearEasing,
             )
         }
     )
     LaunchedEffect(key1 = onCart) {
-        if (!onCart) {
-            setFloatingAnim(false)
-        }
+
+        setFloatingAnim(false)
+
     }
 
     Column(
@@ -505,9 +488,11 @@ fun ProductItemLayout(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .height(this.constraints.maxHeight
-                        .div(2)
-                        .getDp())
+                    .height(
+                        this.constraints.maxHeight
+                            .div(2)
+                            .getDp()
+                    )
                     .clip(MaterialTheme.shapes.medium)
                     .background(MaterialTheme.colors.surface),
             )
@@ -520,13 +505,13 @@ fun ProductItemLayout(
                     }
                     .fillMaxSize()
                     .clip(MaterialTheme.shapes.medium)
-                    .rotate(-35f),
+
             )
-            ReactiveBookmarkIcon(
-                modifier = Modifier.padding(Dimension.xs),
-                isOnBookmarks = onBookmark,
-                onBookmarkChange = onChangeBookmarkState
-            )
+//            ReactiveBookmarkIcon(
+//                modifier = Modifier.padding(Dimension.xs),
+//                isOnBookmarks = onBookmark,
+//                onBookmarkChange = onChangeBookmarkState
+//            )
         }
         Column(
             verticalArrangement = Arrangement.spacedBy(Dimension.xs)
@@ -550,18 +535,18 @@ fun ProductItemLayout(
                         color = MaterialTheme.colors.onBackground.copy(alpha = 0.7f),
                     ),
                 )
-                ReactiveCartIcon(
-                    isOnCart = onCart,
-                    onCartChange = {
-                        /** Prevent multiple click */
-                        if (animatedFloatProductSize !in 1..floatingProductSize.dec()) {
-                            if (!onCart) {
-                                setFloatingAnim(true)
-                            }
-                            onChangeCartState()
-                        }
-                    },
-                )
+//                ReactiveCartIcon(
+//                    isOnCart = onCart,
+//                    onCartChange = {
+//                        /** Prevent multiple click */
+//                        if (animatedFloatProductSize !in 1..floatingProductSize.dec()) {
+//                            if (!onCart) {
+//                                setFloatingAnim(true)
+//                            }
+//                            onChangeCartState()
+//                        }
+//                    },
+//                )
             }
             /** Product's name */
             Text(
@@ -583,17 +568,17 @@ fun ProductItemLayout(
                     .let { originalOffset ->
                         val requiredX = cartOffset.x - originalOffset.x
                         val requiredY = cartOffset.y - originalOffset.y
-                        setFloatingProductOffset(
-                            IntOffset(
-                                x = requiredX.roundToInt(),
-                                y = requiredY.roundToInt(),
-                            )
-                        )
+//                        setFloatingProductOffset(
+//                            IntOffset(
+//                                x = requiredX.roundToInt(),
+//                                y = requiredY.roundToInt(),
+//                            )
+//                        )
                     }
             }
             .offset { animatedFloatingProductOffset }
             .size(animatedFloatProductSize.getDp())
-            .rotate(-35f),
+
     )
 }
 
@@ -637,13 +622,13 @@ fun SummaryRow(
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.SemiBold),
+            style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colors.onSurface.copy(alpha = 0.7f),
         )
 
         Text(
             text = value,
-            style = MaterialTheme.typography.body2.copy(fontWeight = FontWeight.SemiBold),
+            style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.SemiBold),
             color = MaterialTheme.colors.secondary,
         )
     }

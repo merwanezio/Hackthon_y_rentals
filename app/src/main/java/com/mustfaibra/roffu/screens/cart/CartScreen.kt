@@ -79,7 +79,7 @@ fun CartScreen(
     val cartOptionsMenuExpanded by remember { cartViewModel.cartOptionsMenuExpanded }
     val isSyncingCart by remember { cartViewModel.isSyncingCart }
     if (isSyncingCart) {
-        SimpleLoadingDialog(title = "Please wait while we sync your cart")
+        SimpleLoadingDialog(title = "Please wait while we sync your order")
     }
     Box(
         modifier = Modifier
@@ -107,7 +107,7 @@ fun CartScreen(
                 ) {
                     Text(
                         modifier = Modifier.weight(1f),
-                        text = stringResource(id = R.string.cart),
+                        text = "Reservation",
                         style = MaterialTheme.typography.h3,
                     )
 
@@ -181,13 +181,13 @@ fun CartScreen(
             ) {
                 /** total cost row */
                 SummaryRow(
-                    title = stringResource(id = R.string.total),
-                    value = "$$totalPrice"
+                    title = "Amount to confirm reservation ",
+                    value = "DZD ${totalPrice/5}"
                 )
 
                 CustomButton(
                     modifier = Modifier.fillMaxWidth(),
-                    text = stringResource(R.string.checkout_now),
+                    text = "Reserve now",
                     textStyle = MaterialTheme.typography.body1,
                     buttonColor = MaterialTheme.colors.primary,
                     shape = RoundedCornerShape(percent = 35),
@@ -308,7 +308,7 @@ fun CartItemLayout(
                     overflow = TextOverflow.Ellipsis,
                 )
                 Text(
-                    text = "$${(productPrice * currentQty).getDiscountedValue(discount = discount ?: 0)}",
+                    text = "DZD ${(productPrice * currentQty).getDiscountedValue(discount = discount ?: 0)}",
                     style = MaterialTheme.typography.body1,
                     color = MaterialTheme.colors.onBackground.copy(alpha = 0.8f)
                 )
@@ -337,7 +337,7 @@ fun CartItemLayout(
                             shape = CircleShape,
                         )
                         Text(
-                            text = "$currentQty",
+                            text = "$currentQty months",
                             style = MaterialTheme.typography.caption.copy(
                                 fontWeight = FontWeight.Medium,
                             ),
@@ -366,7 +366,7 @@ fun CartItemLayout(
                     modifier = Modifier
                         .offset(x = 0.getDp(), y = animatedOffset.getDp())
                         .size(Dimension.xlIcon)
-                        .rotate(-45f),
+
                 )
             }
         }

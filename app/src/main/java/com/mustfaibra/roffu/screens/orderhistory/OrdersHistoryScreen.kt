@@ -109,7 +109,7 @@ fun OrderItemLayout(
             IconWithText(
                 modifier = Modifier.weight(1f),
                 icon = R.drawable.ic_map_pin,
-                text = "${location.address}, ${location.city} - ${location.country}",
+                text = "N 454628372874",
                 textStyle = MaterialTheme.typography.body1,
             )
             Icon(
@@ -138,6 +138,10 @@ fun OrderItemLayout(
                 style = MaterialTheme.typography.body1,
             )
         }
+        Text(
+            text = "We will set up an appointment to complete the paperwork  ",
+            style = MaterialTheme.typography.body1,
+        )
     }
 }
 

@@ -86,7 +86,7 @@ fun OnboardScreen(
                         duration = 1000,
                     ),
                 text = buildAnnotatedString {
-                    append("Journeys always start with ")
+                    append("There is no place like Home, find yours with ")
                     withStyle(
                         style = MaterialTheme.typography.h1
                             .copy(
@@ -113,7 +113,7 @@ fun OnboardScreen(
                         to = 0.dp,
                         duration = 1000,
                     ),
-                text = "Find cool shoes that make you feel more comfortable during you daily activities.",
+                text = "Find the best Houses around you .",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.body2.copy(
                     fontWeight = FontWeight.Medium,

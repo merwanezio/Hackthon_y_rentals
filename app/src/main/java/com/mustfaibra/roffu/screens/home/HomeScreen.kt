@@ -131,8 +131,8 @@ fun HomeScreen(
             ) {
                 Text(
                     modifier = Modifier.weight(1f),
-                    text = stringResource(id = R.string.discover),
-                    style = MaterialTheme.typography.h2,
+                    text = ("Find Your Home"),
+                    style = MaterialTheme.typography.h3,
                 )
 
                 DrawableButton(
@@ -196,7 +196,7 @@ fun HomeScreen(
                 /** Loading finished successfully, Shoes brands row first! */
                 item(
                     span = {
-                        GridItemSpan(2)
+                        GridItemSpan(4)
                     }
                 ) {
                     ManufacturersSection(
@@ -249,7 +249,7 @@ fun SearchField(
             .fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
-        placeholder = "What are you looking for?",
+        placeholder = "Where do you want to live?",
         textStyle = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Medium),
         padding = PaddingValues(
             horizontal = Dimension.pagePadding,
@@ -264,7 +264,7 @@ fun SearchField(
                 modifier = Modifier
                     .padding(end = Dimension.pagePadding.div(2))
                     .size(Dimension.mdIcon.times(0.7f)),
-                painter = painterResource(id = R.drawable.ic_search),
+                painter = painterResource(id = R.drawable.ic_outline_not_listed_location_24),
                 contentDescription = null,
                 tint = MaterialTheme.colors.onBackground.copy(alpha = 0.4f),
             )
@@ -375,7 +375,7 @@ fun ManufacturersSection(
                 if (activeBrandIndex == index) {
                     Text(
                         text = name,
-                        style = MaterialTheme.typography.body1,
+                        style = MaterialTheme.typography.body2,
                         color = contentColor,
                     )
                 }

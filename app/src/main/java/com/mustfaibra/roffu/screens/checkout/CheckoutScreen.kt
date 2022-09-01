@@ -132,13 +132,13 @@ fun CheckoutScreen(
             /** Delivery Location */
             location?.whatIfNotNull(
                 whatIf = {
-                    DeliveryLocationSection(
-                        address = it.address,
-                        city = "${it.city}, ${it.country}",
-                        onChangeLocationRequested = {
-//                          onChangeLocationRequested()
-                        },
-                    )
+//                    DeliveryLocationSection(
+//                        address = it.address,
+//                        city = "${it.city}, ${it.country}",
+//                        onChangeLocationRequested = {
+////                          onChangeLocationRequested()
+//                        },
+//                    )
                 }
             )
             /** Payment methods */
@@ -197,19 +197,19 @@ fun CheckoutScreen(
                 /** sub total cost row */
                 SummaryRow(
                     title = stringResource(id = R.string.sub_total),
-                    value = "$$subTotal"
+                    value = "DZD $subTotal"
                 )
                 /** shipping cost row */
-                SummaryRow(
-                    title = stringResource(id = R.string.shipping),
-                    value = "$15"
-                )
-                Divider()
-                /** total cost row */
-                SummaryRow(
-                    title = stringResource(id = R.string.total),
-                    value = "$${subTotal.plus(15)}"
-                )
+//                SummaryRow(
+//                    title = stringResource(id = R.string.shipping),
+//                    value = "$15"
+//                )
+//                Divider()
+//                /** total cost row */
+//                SummaryRow(
+//                    title = stringResource(id = R.string.total),
+//                    value = "$${subTotal.plus(15)}"
+//                )
                 CustomButton(
                     modifier = Modifier
                         .padding(top = Dimension.pagePadding)

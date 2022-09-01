@@ -15,6 +15,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -39,6 +40,7 @@ import com.mustfaibra.roffu.R
 import com.mustfaibra.roffu.components.CustomButton
 import com.mustfaibra.roffu.components.DrawableButton
 import com.mustfaibra.roffu.components.ReactiveBookmarkIcon
+import com.mustfaibra.roffu.components.ReactiveCartIcon
 import com.mustfaibra.roffu.sealed.Orientation
 import com.mustfaibra.roffu.ui.theme.Dimension
 import com.mustfaibra.roffu.utils.addMoveAnimation
@@ -125,10 +127,10 @@ fun ProductDetailsScreen(
                     ) {
                         val infiniteTransition = rememberInfiniteTransition()
                         val animatedOffset by infiniteTransition.animateFloat(
-                            initialValue = -20f, targetValue = 40f,
+                            initialValue = -0f, targetValue = 0f,
                             animationSpec = InfiniteRepeatableSpec(
                                 animation = TweenSpec(
-                                    durationMillis = 1300,
+                                    durationMillis = 600,
                                     easing = LinearEasing,
                                 ),
                                 repeatMode = RepeatMode.Reverse,
@@ -141,10 +143,10 @@ fun ProductDetailsScreen(
                             ),
                             contentDescription = null,
                             modifier = Modifier
-                                .offset { IntOffset(y = animatedOffset.toInt(), x = 0) }
+                                .offset { IntOffset(y = animatedOffset.toInt(), x = 30) }
                                 .fillMaxWidth()
                                 .aspectRatio(1f)
-                                .rotate(-(40f)),
+                                .rotate(-(00f)),
                         )
                         Canvas(modifier = Modifier.fillMaxWidth()) {
 
@@ -176,8 +178,8 @@ fun ProductDetailsScreen(
                                 to = 0.dp,
                                 duration = 700,
                             ),
-                        text = "$${it.price}",
-                        style = MaterialTheme.typography.h4,
+                        text = "DZD ${it.price} / Month",
+                        style = MaterialTheme.typography.h6,
                     )
                     /** Bookmarking button */
                     ReactiveBookmarkIcon(
@@ -220,7 +222,7 @@ fun ProductDetailsScreen(
                             to = 0.dp,
                             duration = 700,
                         ),
-                    text = if (isOnCartStateProvider()) "Remove from cart" else "Add to cart",
+                    text = "Proceed",
                     onButtonClicked = { onUpdateCartState(productId) },
                     buttonColor = MaterialTheme.colors.primary,
                     contentColor = MaterialTheme.colors.onPrimary,
@@ -295,14 +297,14 @@ fun SizesSection(
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement
-            .spacedBy(Dimension.pagePadding.div(2)),
+            .spacedBy(Dimension.pagePadding.div(0)),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            text = stringResource(R.string.size),
-            style = MaterialTheme.typography.subtitle2.copy(fontWeight = FontWeight.SemiBold),
-        )
-        sizes.forEach { size ->
+//        Text(
+//            text = "Location",
+//            style = MaterialTheme.typography.caption.copy(fontWeight = FontWeight.Light),
+//        )
+//        sizes.forEach { size ->
             Box(
                 modifier = Modifier
                     .shadow(
@@ -311,20 +313,24 @@ fun SizesSection(
                     )
                     .clip(MaterialTheme.shapes.small)
                     .background(
-                        if (pickedSizeProvider() == size) MaterialTheme.colors.primary
-                        else MaterialTheme.colors.background,
+//                        if (pickedSizeProvider() == size) MaterialTheme.colors.primary
+                         MaterialTheme.colors.background,
                     )
-                    .clickable { onSizePicked(size) }
+                    .clickable {
+
+                    }
                     .padding(Dimension.sm)
             ) {
-                Text(
-                    text = "$size",
-                    style = MaterialTheme.typography.subtitle2.copy(fontWeight = FontWeight.SemiBold),
-                    color = if (pickedSizeProvider() == size) MaterialTheme.colors.onPrimary
-                    else MaterialTheme.colors.onBackground,
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_round_map_24),
+                    contentDescription = null,
+                    modifier = modifier
+                        .clip(CircleShape)
+                        .padding(Dimension.elevation)
+                        .size(Dimension.smIcon),
                 )
             }
-        }
+//        }
     }
 }
 
@@ -341,24 +347,33 @@ fun ColorsSection(
             .spacedBy(Dimension.pagePadding.div(2)),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        colors.forEach { color ->
-            Box(
-                modifier = Modifier
-                    .size(Dimension.smIcon)
-                    .border(
-                        width = 2.dp,
-                        color = if (pickedColorProvider() == color) MaterialTheme.colors.primary else Color.Transparent,
-                        shape = MaterialTheme.shapes.small,
-                    )
-                    .padding(Dimension.elevation)
-                    .clip(MaterialTheme.shapes.small)
-                    .background(color = Color(color.getValidColor()))
-                    .clickable { onColorPicked(color) }
-            )
-        }
+//        colors.forEach { color ->
+//            Box(
+//                modifier = Modifier
+//                    .size(Dimension.smIcon)
+//                    .border(
+//                        width = 2.dp,
+//                        color = if (pickedColorProvider() == color) MaterialTheme.colors.primary else Color.Transparent,
+//                        shape = MaterialTheme.shapes.small,
+//                    )
+//                    .padding(Dimension.elevation)
+//                    .clip(MaterialTheme.shapes.small)
+//                    .background(color = Color(color.getValidColor()))
+//                    .clickable { onColorPicked(color) }
+//            )
+//        }
         Text(
-            text = stringResource(R.string.color),
+            text = "Previous tenants : 12",
             style = MaterialTheme.typography.subtitle2.copy(fontWeight = FontWeight.SemiBold),
         )
+        Text(
+            text = "2 Bedrooms",
+            style = MaterialTheme.typography.subtitle2.copy(fontWeight = FontWeight.SemiBold),
+        )
+        Text(
+            text = "90 m²",
+            style = MaterialTheme.typography.subtitle2.copy(fontWeight = FontWeight.SemiBold),
+        )
+
     }
 }
